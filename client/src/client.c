@@ -83,14 +83,12 @@ void leer_consola(t_log* logger)
 	char *linea;
 	while (strcmp(linea = readline(">"),"")) {
     
-
         if (!linea) {
-            break;
+			exit(0);
         }
 		log_info(logger,linea);
-        printf("%s\n", linea);
-        free(linea);
 	}
+	 free(linea);
 }
 
 void paquete(int conexion)
