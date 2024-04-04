@@ -36,6 +36,7 @@ int esperar_cliente(int socket_servidor)
 	assert(!"no implementado!");
 
 	// Aceptamos un nuevo cliente
+	int fd_conexion = accept(fd_escucha, NULL, NULL);
 	int socket_cliente;
 	log_info(logger, "Se conecto un cliente!");
 
