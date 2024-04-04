@@ -43,7 +43,7 @@ int main(void)
 
 	/* ---------------- LEER DE CONSOLA ---------------- */
 
-	//leer_consola(logger);
+	leer_consola(logger);
 
 	/*---------------------------------------------------PARTE 3-------------------------------------------------------------*/
 
@@ -83,14 +83,9 @@ void leer_consola(t_log* logger)
 {
 	char *linea;
 	while (strcmp(linea = readline(">"),"")) {
-    
-        if (!linea) {
-			free(linea);
-			exit(0);
-        }
-		log_info(logger,linea);
+    	log_info(logger,linea);
 	}
-	 free(linea);
+	free(linea);
 }
 
 void paquete(int conexion)
@@ -104,11 +99,7 @@ void paquete(int conexion)
 	paquete = crear_paquete();
 	char *linea;
 	while (strcmp(linea = readline(">"),"")) {
-        if (!linea) {
-			free(linea);
-			exit(0);
-        }
-		agregar_a_paquete(paquete,linea,strlen(linea)+1);
+        agregar_a_paquete(paquete,linea,strlen(linea)+1);
 	}
 	free(linea);
 	enviar_paquete(paquete,conexion);
