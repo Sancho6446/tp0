@@ -28,10 +28,12 @@ int main(void)
 
 	config = iniciar_config();
 	config = config_create("cliente.config");
-	log_info(logger,config_get_string_value(config, "CLAVE"));
+	valor = config_get_string_value(config, "CLAVE");
+	log_info(logger,valor);
 	ip = config_get_string_value(config, "IP");
 	puerto = config_get_string_value(config, "PUERTO");
-	valor = config_get_string_value(config, "CLAVE");
+	
+
 	
 	// Usando el config creado previamente, leemos los valores del config y los 
 	// dejamos en las variables 'ip', 'puerto' y 'valor'
@@ -41,7 +43,7 @@ int main(void)
 
 	/* ---------------- LEER DE CONSOLA ---------------- */
 
-	leer_consola(logger);
+	//leer_consola(logger);
 
 	/*---------------------------------------------------PARTE 3-------------------------------------------------------------*/
 
@@ -92,13 +94,27 @@ void leer_consola(t_log* logger)
 
 void paquete(int conexion)
 {
-	// Ahora toca lo divertido!
-	char* leido;
 	t_paquete* paquete;
-	crear_paquete();
-	agregar_a_paquete(paquete,leido,strlen(leido)+1);
+	paquete = crear_paquete();
+	char *linea;
+	while (strcmp(linea = readline(">"),"")) {
+		agregar_a_paquete(paquete,linea,strlen(linea)+1);
+		
+		
+		
+        if (!linea) {
+			exit(0);
+        }
+		free(linea);
+	}
 	enviar_paquete(paquete,conexion);
-	eliminar_paquete(conexion);
+	eliminar_paquete(paquete);
+	// Ahora toca lo divertido!
+	
+	
+	
+	
+	
 
 	// Leemos y esta vez agregamos las lineas al paquete
 	// ¡No te olvides de liberar las líneas y el paquete antes de regresar!
